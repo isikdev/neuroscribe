@@ -1,0 +1,243 @@
+/*
+Theme Name: GPT3
+Description: The first theme for GPT3 responder
+Version: 0.1
+Author: Paoloart, GiorgioS
+Template: 42 is the completion to everything
+
+*/
+
+body {
+  background-color: white;
+  font-family: helvetica, sans-serif;
+  color: #202123;
+  margin: 0 !important;
+  font: 1rem/1.5 var(--bs-font-sans-serif);
+}
+
+a {
+  color: var(--bs-blue);
+}
+
+h1 h2 {
+  color: #202123;
+  font-weight: 700;
+}
+
+.save {
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 25px;
+  max-width: 700px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #094067;
+  padding: 10px 0;
+  border-width: 0px;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  transition: all 100ms ease 0s;
+  box-sizing: border-box;
+  outline: 0px !important;
+  cursor: pointer;
+  
+}
+
+.card-header:hover {
+  cursor: pointer;
+  background-color: #D8EEFE;;
+  /* color: white; */
+}
+
+/* hover effect for the toggle switches */
+.custom-control-label:hover {
+  cursor: pointer;
+  background-color: #D8EEFE;
+}
+
+.apikeybutton {
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 10px 0 24px;
+  max-width: 700px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #6e6e80;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-width: 0px;
+  border-radius: 5px;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  transition: all 100ms ease 0s;
+  box-sizing: border-box;
+  outline: 0px !important;
+  cursor: pointer;
+  white-space: nowrap;
+  margin: auto;
+}
+.apikeybutton:hover {
+  background-color: #E5E5E5;
+  
+
+}
+.apikeybutton:active {
+  background-color: #D3D3D3;
+  border-radius: 5px;
+
+}
+
+.form-control-dark {
+  border-color: var(--bs-gray);
+}
+
+body .list {
+  position: relative;
+  width: 250px;
+  margin: 0px auto;
+  display: block;
+}
+body .list ::-webkit-input-placeholder {
+  color: #cecece;
+}
+body .list .input {
+  outline: none;
+  border: 1px solid white;
+  background-color: #53a8e6;
+  color: white;
+  height: 50px;
+  width: 250px;
+  padding-left: 10px;
+  font-weight: 800;
+  font-size: 16px;
+  margin-left: -5px;
+} 
+body .list span {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.8;
+  cursor: pointer;
+  transition: all 200ms;
+  color: white;
+  will-change: transform;
+}
+body .list span:hover {
+  transform: rotate(180deg);
+}
+body ul {
+  padding: 0px;
+}
+body ul .draggable {
+  will-change: transform;
+  list-style-type: none;
+  margin: 10px;
+  background-color: white;
+  color: #212121;
+  line-height: 1.5;
+  cursor: move;
+  transition: all 400ms;
+  user-select: none;
+  position: relative;
+}
+body ul .draggable:after {
+  content: 'drag me';
+  right: 7px;
+  font-size: 10px;
+  position: absolute;
+  cursor: pointer;
+  line-height: 5;
+  transition: all 400ms;
+  transition-timing-function: cubic-bezier(0.48, 0.72, 0.62, 1.5);
+  transform: translateX(120%);
+  opacity: 0;
+}
+body ul .draggable:hover:after {
+  opacity: 1;
+  transform: translate(0);
+}
+ 
+.over {
+  transform: scale(1.1, 1.1);
+}
+
+.feature-text {
+  margin-right: 5px;
+}
+.feature-text::before {
+  font-weight:bold;
+  content: attr(data-title);
+}
+.prompt-text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+}
+
+.typewriter h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid #28ac8c; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin-right: 0 auto; /* Gives that scrolling effect as the typing happens */
+  margin-top:50px;
+  letter-spacing: .15em; /* Adjust as needed */
+  line-height: 1.5;
+  animation: 
+    typing 2s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+.typewritersimpler {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  animation: 
+  typing .5s steps(40, end),
+    step-end infinite;
+}
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes sliding {
+  from { height: 0 }
+  to { height: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #28ac8c; }
+}
+
+.logoimage {
+  animation: rotation 60s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.suggestion {
+  color: #e1e1e1;
+  font-style: italic;
+  font-size: smaller;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.whitehover:hover {
+  color: white;
+}

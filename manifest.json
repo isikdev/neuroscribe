@@ -1,0 +1,45 @@
+{
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "./background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "./icons/icon48.png",
+    "default_popup": "popup.html",
+    "default_title": "Нейроскайб"
+  },
+  "default_locale": "en",
+  "description": "Российский нейро-ассистент для создателей контента. Генерируйте тексты разных жанров и стилей за секунды, с помощью нейрочата и шаблонов.",
+  "icons": {
+    "128": "./icons/icon128.png",
+    "16": "./icons/icon16.png",
+    "48": "./icons/icon48.png"
+  },
+  "manifest_version": 2,
+  "name": "Нейроскайб",
+  "options_page": "popup.html?options=1",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "clipboardWrite",
+    "storage",
+    "background",
+    "<all_urls>",
+    "tabs"
+  ],
+  "short_name": "Нейроскайб",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.1"
+}

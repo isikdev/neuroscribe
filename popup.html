@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>GPT-Prompter</title>
+  </head>
+
+  <body>
+    <div class="container-sm" style="width: 600px">
+      <div
+        class="card text-center"
+        style="
+          border-radius: 0px;
+          background-color: rgba(0, 0, 0, 0.03);
+          border: 0;
+        "
+      >
+        <div class="card-body">
+          <h5>
+            <img src="./icons/icon16.png" alt="logo" class="logoimage" />
+            Нейроскайб<br />
+          </h5>
+          <!-- <p class="card-text">Here are the instructions to configure the plugin to work properly</p> -->
+        </div>
+      </div>
+      <div class="row" style="padding: 10px">
+        <div class="col-sm-4">
+          <a
+            id="linkToGuide"
+            class="apikeybutton"
+            href="https://www.gptprompter.com/how-to-use-it"
+            style="padding-left: 0.5em"
+            >Как ввести запросы?</a
+          >
+          <input class="w-100"
+            type="text"
+            class="form-control"
+            id="apikey"
+            placeholder="Вставьте свой API ключ"
+          />
+        </div>
+        <div class="col-sm-2">
+          <button
+            type="button"
+            class="apikeybutton"
+            id="saveKey"
+            style="color: #094067; cursor: pointer"
+          >
+            Сохранить
+          </button>
+        </div>
+        <div class="col-sm-2">
+          <button
+            type="button"
+            class="apikeybutton"
+            id="deleteKey"
+            style="color: red; margin-left: -20px; cursor: pointer"
+          >
+            Удалить
+          </button>
+        </div>
+        <div class="col-sm-2">
+          <button
+            type="button"
+            class="apikeybutton"
+            style="cursor: pointer"
+            id="showKey"
+          >
+            Показать API ключ
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <a
+          id="linkToAPI"
+          class="apikeybutton"
+          href="https://beta.openai.com/account/api-keys"
+          >Как я могу генерировать API ключ?</a
+        >
+      </div>
+      <div
+        id="advanced settings"
+        class="card text-bg-light"
+        style="border-radius: 0px"
+      >
+        <div class="card-header" style="border: 0" id="advancedSettingsHeader">
+          <img src="./icons/icon16.png" alt="logo" class="logo" />
+          <b style="display: inline-block; line-height: 40px">
+            Расширенные настройки</b
+          >
+        </div>
+        <div class="card-body collapse" id="advancedSettingsBody">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="probabilityToggle"
+              checked
+            />
+            <label class="custom-control-label" for="probabilityToggle"
+              >Показать средние вероятности токенов (<a
+                id="linktoLogprob"
+                href="https://beta.openai.com/docs/api-reference/completions/create#completions/create-logprobs"
+                >logprobs</a
+              >)</label
+            >
+          </div>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="autoAddToggle"
+            />
+            <label class="custom-control-label" for="autoAddToggle"
+              >Автоматическое дополнение запросов</label
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        id="prompt_design"
+        class="card text-bg-light"
+        style="border-radius: 0px"
+      >
+        <div class="card-header" id="promptDesignHeader">
+          <div style="display: inline-block; vertical-align: middle">
+            <img src="./icons/icon16.png" alt="logo" class="logo" />
+            <b style="display: inline-block; line-height: 40px"
+              >Дизайн промптов</b
+            >
+          </div>
+          <a
+            id="linkToReddit"
+            href="https://www.reddit.com/r/GPTPrompter/"
+            class="save whitehover"
+            style="position: absolute; right: 0"
+            >Подпишитесь на наш редит</a
+          >
+        </div>
+
+        <!--selector-->
+        <div id="promptDesignBody">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputmodel" style="border: 0"
+                >Модель</label
+              >
+            </div>
+            <select class="custom-select" id="inputmodel">
+              <option 
+                value="gpt-4"
+                title="GPT-4 model, the most advanced model available ($0.06/ 1k tokens)"
+              >
+              ❹ gpt-4
+              </option>
+              <option
+                selected
+                value="gpt-3.5-turbo"
+                title="ChatGPT model, 1/10 cost of davinci ($0.002/ 1k tokens)"
+              >
+                🅶 gpt-3.5-turbo
+              </option>
+              <option
+                value="text-davinci-003"
+                title="Most capable GPT-3 model, most expensive ($0.02/ 1k tokens)"
+              >
+                ↁ text-davinci-003
+              </option>
+              <option
+                value="text-davinci-002"
+                title="Capable GPT-3 model, most expensive ($0.02/ 1k tokens)"
+              >
+                🅳 text-davinci-002
+              </option>
+              <option
+                value="text-curie-001"
+                title="Very capable, but faster and lower cost than Davinci. ($0.002/ 1k tokens)"
+              >
+                🅲 text-curie-001
+              </option>
+              <option
+                value="text-babbage-001"
+                title="Capable of straightforward tasks, very fast, and lower cost. ($0.0005/ 1k tokens)"
+              >
+                🅑 text-babbage-001
+              </option>
+              <option
+                value="text-ada-001"
+                title="Capable of very simple tasks, fastest model and lowest cost. ($0.0004/ 1k tokens) "
+              >
+                🅐 text-ada-001
+              </option>
+            </select>
+          </div>
+
+          <!--temperature-->
+          <div
+            class="row"
+            style="margin-left: 0px !important"
+            title="What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer."
+          >
+            <label for="temperature" class="form-label col-sm-3"
+              >Температура</label
+            >
+            <input
+              type="range"
+              class="form-range col-sm-6"
+              style="margin-right: 30px; padding: 0"
+              id="temperature"
+              min="0"
+              max="2"
+              step="0.01"
+              value="0.1"
+            />
+            <input
+              class="text-input col-sm-2"
+              type="text"
+              readonly="readonly"
+              title="Sampling temperature to use."
+              style="text-align: right; border: 0"
+              id="temp"
+              value="0.1"
+            />
+          </div>
+
+          <!--max token-->
+          <div
+            class="row"
+            style="margin-left: 0px !important"
+            title="The maximum number of tokens to generate in the completion."
+          >
+            <!-- <label for="maxtoken" class="form-label col-sm-3">Max tokens</label>
+            <input
+              id="maxtoken"
+              type="range"
+              class="form-range col-sm-6"
+              style="margin-right: 30px; padding: 0"
+              min="0"
+              max="4096"
+              step="1"
+              value="1024"
+            />
+            <input
+              class="text-input col-sm-2"
+              type="text"
+              readonly="readonly"
+              title="The maximum number of tokens to generate in the completion."
+              style="text-align: right; border: 0"
+              id="token"
+              value="1024"
+            /> -->
+          </div>
+          <div class="card-body">
+            <div id="chatgptinput">
+              <div style="display: flex; justify-content: center">
+                <span class="suggestion">System</span>
+              </div>
+              <textarea
+                class="form-control"
+                id="systeminput"
+                rows="1"
+                title="Describe the assistant's personality."
+                style="margin-bottom: 10px;"
+                placeholder="Пишите запросы тут...."
+              >
+Ты очень полезный помощник</textarea
+              >
+              <div id="message-container">
+                <div class="row" id="message-row-1">
+                  <div class="col-sm-2 " style="padding-right:0px">
+                  
+                    <button
+                      type="button"
+                      class="btn btn-default btn-sm apikeybutton assistantOrUser"
+                      id="assistantOrUser-1"
+                      style="font-size: 12px; cursor: pointer; color: #303030; width:8em; border: 2px #ededed solid;"
+                    >Пользователь
+                    </button>
+                    <button
+                      type="button"
+                      class="close"
+                      id="deleteChatGPTMessage-1"
+                      aria-label="Close"
+                      style="color:red;"
+                      hidden
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="col-sm-10">
+                    <textarea
+                      class="form-control systeminput"
+                      id="systeminput-1"
+                      rows="2"
+                      title="User's input."
+                      style="margin-bottom: 10px; float: right; border-radius: 1em;"
+                      placeholder="Type your message here..."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: center">
+                <button
+                  type="button"
+                  id="addChatGPTMessage"
+                  class="apikeybutton"
+                  style="cursor: pointer; margin-bottom: 10px;"
+                >Добавить сообщение
+                </button>
+              </div>
+
+              <button
+                type="button"
+                id="createChatGPTPrompt"
+                class="list-group-item list-group-item-action text-center"
+                style="background-color: #10a37f; color: white"
+                hidden
+              >
+                <b>Создать запрос</b>
+              </button>
+              <button
+                type="button"
+                id="addChatGPTPlaceHolder"
+                class="list-group-item list-group-item-action text-center"
+                style="background-color: #108da3; color: white"
+              >
+                <b>Добавить текстовое поле</b>
+              </button>
+            </div>
+
+            <div id="completioninput" hidden>
+              <div style="display: flex; justify-content: center">
+                <span class="suggestion"
+                  >#TEXT# в подсказке является заполнителем, который будет
+                  заменяется выбранным вами текстом.</span
+                >
+              </div>
+              <textarea
+                class="form-control"
+                id="promptinput"
+                rows="3"
+                title="The keyword #TEXT# is later replaced with the selected text. It cannot be erased here"
+                style = "margin-bottom: 10px; border-radius: 1em;"
+                placeholder="Type your prompt here... (with #TEXT# placeholder)"
+              ></textarea
+              >
+              <button
+                type="button"
+                id="createPrompt"
+                class="list-group-item list-group-item-action text-center"
+                style="background-color: #10a37f; color: white"
+                hidden
+              >
+                <b>Создать запрос</b>
+              </button>
+              <button
+                type="button"
+                id="addPlaceHolder"
+                class="list-group-item list-group-item-action text-center"
+                style="background-color: #108da3; color: white"
+                
+              >
+                <b>Добавьте текстовое поле</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card text-bg-light" style="border-radius: 0px">
+        <div class="card-header" id="yourPromptsHeader">
+          <div style="display: inline-block; vertical-align: middle">
+            <img src="./icons/icon16.png" alt="logo" class="logo" />
+            <b style="display: inline-block; line-height: 40px">Ваши запросы</b>
+          </div>
+          <button
+            type="button"
+            id="history"
+            class="save whitehover"
+            style="position: absolute; right: 0"
+          >
+            История ваших запросов
+          </button>
+        </div>
+
+        <div class="card-body" style="border: 0" id="yourPromptsBody">
+          <ul id="list-of-prompts" class="list-group"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="popup.js"></script> -->
+  </body>
+</html>
